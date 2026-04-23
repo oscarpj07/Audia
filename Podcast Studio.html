@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Audia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg:      #f5e3cc;
+  --surface: #fdf6ee;
+  --surface2: #faebd7;
+  --border:  #d9bf9a;
+  --text:    #1c1410;
+  --muted:   #8a6e5c;
+  --accent:  #ca6549;
+  --alight:  rgba(202,101,73,0.1);
+  --sidebar: 220px;
+  --mini-h:  80px;
+}
+html, body, #root { height: 100%; }
+body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; overflow:hidden; }
+
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:4px; }
+
+/* ── Range input (player page scrubber) ── */
+input[type=range] {
+  -webkit-appearance:none; appearance:none;
+  height:3px; border-radius:4px; background:rgba(0,0,0,0.12);
+  outline:none; cursor:pointer; width:100%; display:block; margin:0;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance:none; width:13px; height:13px; border-radius:50%;
+  background:var(--accent); cursor:pointer; transition:transform .15s; margin-top:-5px;
+}
+input[type=range]:hover::-webkit-slider-thumb { transform:scale(1.3); }
+input[type=range]::-moz-range-thumb { width:13px; height:13px; border-radius:50%; background:var(--accent); border:none; }
+
+/* ── Mini-player range (smaller, thumb hidden until hover) ── */
+input.mini-range {
+  -webkit-appearance:none; appearance:none;
+  height:2px; border-radius:4px; background:rgba(0,0,0,0.1);
+  outline:none; cursor:pointer; width:100%; display:block; margin:0;
+  position:relative; z-index:1;
+}
+input.mini-range::-webkit-slider-thumb {
+  -webkit-appearance:none; width:10px; height:10px; border-radius:50%;
+  background:var(--accent); cursor:pointer; margin-top:-4px;
+  opacity:0; transition:opacity .15s;
+}
+input.mini-range:hover::-webkit-slider-thumb { opacity:1; }
+input.mini-range::-moz-range-thumb { width:10px; height:10px; border-radius:50%; background:var(--accent); border:none; }
+
+textarea { font-family:'DM Sans',sans-serif; resize:none; outline:none; }
+button   { font-family:'DM Sans',sans-serif; }
+
+@keyframes spin    { to { transform:rotate(360deg); } }
+@keyframes pulse   { 0%,100%{opacity:.4}50%{opacity:1} }
+@keyframes waveBar { 0%,100%{transform:scaleY(.2)}50%{transform:scaleY(1)} }
+@keyframes fadeUp  { from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)} }
+@keyframes slideUp { from{transform:translateY(100%)}to{transform:translateY(0)} }
+@keyframes modalIn { from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)} }
+
+.fade-up  { animation:fadeUp .4s cubic-bezier(.22,.68,0,1.2) both; }
+.slide-up { animation:slideUp .35s cubic-bezier(.32,.72,0,1) both; }
+.serif    { font-family:'DM Serif Display',Georgia,serif; }
+.mono     { font-family:'DM Mono','Fira Code',monospace; }
+
+.chip {
+  padding:9px 20px; border-radius:99px;
+  border:1px solid var(--border); background:var(--surface);
+  font-size:13px; color:var(--text); cursor:pointer;
+  transition:all .15s; white-space:nowrap; line-height:1;
+}
+.chip:hover { border-color:var(--accent); background:var(--alight); color:var(--accent); }
+
+.section-label {
+  font-family:'DM Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin-bottom:12px;
+}
+
+/* Sidebar nav item */
+.sb-item {
+  display:flex; align-items:center; gap:11px; padding:10px 16px; border-radius:9px;
+  cursor:pointer; font-size:14px; color:var(--muted); transition:all .15s;
+  border:none; background:none; width:100%; text-align:left; position:relative;
+}
+.sb-item:hover { background:var(--surface2); color:var(--text); }
+.sb-item.active { background:var(--alight); color:var(--accent); font-weight:500; }
+.sb-item.active::before {
+  content:''; position:absolute; left:0; top:25%; bottom:25%;
+  width:3px; background:var(--accent); border-radius:0 2px 2px 0;
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{"accentColor":"#ca6549","bgColor":"#f5e3cc","fontSize":12}/*EDITMODE-END*/;
+
+const PALETTE = [
+  'oklch(72% 0.13 200)','oklch(55% 0.15 280)','oklch(65% 0.15 140)',
+  'oklch(68% 0.14 55)', 'oklch(62% 0.15 15)', 'oklch(70% 0.13 330)',
+];
+
+const TOPICS = [
+  { topic:'The History of the Universe', cat:'Science' },
+  { topic:'Why do we dream?',            cat:'Science' },
+  { topic:'The Silk Road',               cat:'History' },
+  { topic:'How music affects the brain', cat:'Science' },
+  { topic:'Art Through the Ages',        cat:'Culture' },
+  { topic:'Deep sea mysteries',          cat:'Nature'  },
+  { topic:'The science of sleep',        cat:'Science' },
+  { topic:'How languages evolve',        cat:'Culture' },
+  { topic:'The history of money',        cat:'History' },
+  { topic:'What is consciousness?',      cat:'Science' },
+];
+
+const PLACEHOLDER_TOPICS = [
+  'Try: why do we dream…',
+  'Try: the history of chocolate…',
+  'Try: how volcanoes form…',
+  'Try: the rise of the Roman Empire…',
+  'Try: what happens inside a black hole…',
+];
+
+const GEN_STEPS = [
+  'Researching your topic…','Shaping the story…','Writing the script…',
+  'Generating voices…','Mixing audio…','Adding transitions…','Almost ready…',
+];
+
+function seedFrom(s) { let h=0; for(let i=0;i<s.length;i++) h=(Math.imul(31,h)+s.charCodeAt(i))|0; return Math.abs(h); }
+function makePodcast(idea) {
+  const seed = seedFrom(idea);
+  return { id:Date.now(), idea,
+    title: idea.length>60 ? idea.slice(0,57)+'…' : idea,
+    color: PALETTE[seed%PALETTE.length],
+    duration: 1680+(seed%420),
+    createdAt: new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) };
+}
+function fmt(s) { const m=Math.floor(s/60),sec=Math.floor(s%60); return `${m}:${sec.toString().padStart(2,'0')}`; }
+
+// ── Icons ─────────────────────────────────────────────────────────
+const IconPlay  = ({s=22}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>;
+const IconPause = ({s=22}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="currentColor"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>;
+const IconChevL = ({s=18}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M15 18l-6-6 6-6"/></svg>;
+const IconChevR = ({s=16}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M9 18l6-6-6-6"/></svg>;
+const IconMic   = ({s=18,c='currentColor'}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke={c} strokeWidth="1.8" strokeLinecap="round"><rect x="9" y="2" width="6" height="11" rx="3"/><path d="M5 10a7 7 0 0 0 14 0M12 19v3M8 22h8"/></svg>;
+const IconExplore = ({s=17}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>;
+const IconLibrary = ({s=17}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M9 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h4M9 3h10a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H9M9 3v18"/></svg>;
+const IconProfile = ({s=17}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>;
+const IconSettings = ({s=17}) => <svg width={s} height={s} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>;
+
+// Skip icons — cleaner versions
+const IconSkip15Back = () => (
+  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
+    <path d="M11 17a6 6 0 1 1 0-10H17"/>
+    <path d="M15 14v-4l2 1"/>
+    <path d="M17 7l-4-4v4"/>
+  </svg>
+);
+const IconSkip30Fwd = () => (
+  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round">
+    <path d="M13 17a6 6 0 1 0 0-10H7"/>
+    <path d="M7 7l4-4v4"/>
+    <path d="M9 11v6l4-3-4-3z" fill="currentColor" stroke="none"/>
+  </svg>
+);
+
+// ── WaveBars ──────────────────────────────────────────────────────
+function WaveBars({ color='var(--accent)', n=8, h=22 }) {
+  const amps = [.45,.75,1,.6,.88,.52,.92,.42];
+  return (
+    <div style={{ display:'flex', gap:3, alignItems:'flex-end', height:h, flexShrink:0 }}>
+      {Array.from({length:n},(_,i)=>(
+        <div key={i} style={{ width:3, height:h*amps[i%8], borderRadius:2, background:color, opacity:.82,
+          animation:`waveBar ${.62+i*.07}s ease-in-out infinite`, animationDelay:`${i*.06}s` }}/>
+      ))}
+    </div>
+  );
+}
+
+// ── AlbumArt ──────────────────────────────────────────────────────
+function AlbumArt({ color, size=200 }) {
+  return (
+    <div style={{ width:size, height:size, borderRadius:Math.round(size*.09), background:color, flexShrink:0,
+      display:'flex', alignItems:'center', justifyContent:'center',
+      boxShadow:`0 12px 40px rgba(0,0,0,0.18)` }}>
+      <svg width={size*.36} height={size*.36} viewBox="0 0 40 40" fill="none">
+        <circle cx="20" cy="20" r="18" fill="white" fillOpacity=".18"/>
+        <circle cx="20" cy="20" r="7"  fill="white" fillOpacity=".55"/>
+        <circle cx="20" cy="20" r="2.5" fill="white"/>
+        <path d="M20 2 A18 18 0 0 1 38 20" stroke="white" strokeOpacity=".35" strokeWidth="2.2" fill="none" strokeLinecap="round"/>
+      </svg>
+    </div>
+  );
+}
+
+// ── Full Scrubber (player page) ────────────────────────────────────
+function Scrubber({ progress, duration, onChange }) {
+  const pct = duration>0?(progress/duration)*100:0;
+  return (
+    <div style={{ width:'100%' }}>
+      <div style={{ position:'relative', marginBottom:6 }}>
+        <div style={{ position:'absolute', top:'50%', left:0, transform:'translateY(-50%)', height:3, borderRadius:4,
+          background:'var(--accent)', width:`${pct}%`, pointerEvents:'none', transition:'width .1s linear' }}/>
+        <input type="range" min={0} max={duration} value={progress}
+          onChange={e=>onChange(Number(e.target.value))}
+          style={{ position:'relative', zIndex:1, background:'transparent' }}/>
+      </div>
+      <div className="mono" style={{ display:'flex', justifyContent:'space-between', fontSize:11, color:'var(--muted)', fontVariantNumeric:'tabular-nums' }}>
+        <span>{fmt(progress)}</span><span>-{fmt(duration-progress)}</span>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// MINI PLAYER — scrubber lives INSIDE the bar
+// ══════════════════════════════════════════════════════════════════
+function MiniPlayer({ podcast, playing, progress, onPlayPause, onSkip, onOpen }) {
+  const pct = podcast.duration>0?(progress/podcast.duration)*100:0;
+
+  // Skip button — stacked icon + label
+  const SkipBtn = ({ label, onClick }) => (
+    <button onClick={onClick} style={{
+      display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:2,
+      width:44, height:44, borderRadius:10, border:'none', background:'rgba(0,0,0,0.05)',
+      cursor:'pointer', color:'var(--muted)', transition:'all .15s', flexShrink:0,
+    }}
+      onMouseEnter={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.1)'; e.currentTarget.style.color='var(--text)'; }}
+      onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.05)'; e.currentTarget.style.color='var(--muted)'; }}>
+      {label === '-15' ? <IconSkip15Back/> : <IconSkip30Fwd/>}
+      <span className="mono" style={{ fontSize:8, fontWeight:600, lineHeight:1 }}>{label === '-15' ? '15s' : '30s'}</span>
+    </button>
+  );
+
+  return (
+    <div className="slide-up" style={{
+      position:'fixed', bottom:0, left:'var(--sidebar)', right:0, zIndex:200,
+      height:'var(--mini-h)', background:'rgba(253,246,238,0.97)', backdropFilter:'blur(18px)',
+      borderTop:'1px solid var(--border)', display:'flex', alignItems:'center',
+      padding:'0 20px', gap:14,
+    }}>
+      {/* Subtle colour tint */}
+      <div style={{ position:'absolute', inset:0, pointerEvents:'none', background:`${podcast.color}0d`, transition:'background .5s' }}/>
+
+      {/* Album art */}
+      <div onClick={onOpen} style={{ cursor:'pointer', flexShrink:0 }}>
+        <div style={{ width:48, height:48, borderRadius:10, background:podcast.color,
+          display:'flex', alignItems:'center', justifyContent:'center',
+          boxShadow:`0 3px 12px ${podcast.color}50` }}>
+          <svg width={20} height={20} viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="18" fill="white" fillOpacity=".2"/>
+            <circle cx="20" cy="20" r="6"  fill="white" fillOpacity=".55"/>
+            <circle cx="20" cy="20" r="2"  fill="white"/>
+          </svg>
+        </div>
+      </div>
+
+      {/* Title + scrubber (takes remaining space) */}
+      <div style={{ flex:1, minWidth:0 }}>
+        <div style={{ fontSize:13, fontWeight:600, whiteSpace:'nowrap', overflow:'hidden',
+          textOverflow:'ellipsis', marginBottom:5, color:'var(--text)' }}>
+          {podcast.title}
+        </div>
+        {/* Scrubber row */}
+        <div style={{ display:'flex', alignItems:'center', gap:8 }}>
+          <span className="mono" style={{ fontSize:10, color:'var(--muted)', flexShrink:0, fontVariantNumeric:'tabular-nums' }}>
+            {fmt(progress)}
+          </span>
+          <div style={{ flex:1, position:'relative', display:'flex', alignItems:'center' }}>
+            {/* Filled track */}
+            <div style={{ position:'absolute', left:0, top:'50%', transform:'translateY(-50%)',
+              height:2, borderRadius:4, background:'var(--accent)',
+              width:`${pct}%`, pointerEvents:'none', transition:'width .1s linear', zIndex:2 }}/>
+            <input className="mini-range" type="range" min={0} max={podcast.duration} value={progress}
+              onChange={e => window.dispatchEvent(new CustomEvent('miniseek', { detail: Number(e.target.value) }))}
+              style={{ position:'relative' }}/>
+          </div>
+          <span className="mono" style={{ fontSize:10, color:'var(--muted)', flexShrink:0, fontVariantNumeric:'tabular-nums' }}>
+            -{fmt(podcast.duration-progress)}
+          </span>
+        </div>
+      </div>
+
+      {/* Controls */}
+      <div style={{ display:'flex', alignItems:'center', gap:6, flexShrink:0 }}>
+        <SkipBtn label="-15" onClick={()=>onSkip(-15)}/>
+        <button onClick={onPlayPause} style={{
+          width:48, height:48, borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center',
+          border:'none', background:'var(--accent)', color:'white', cursor:'pointer', flexShrink:0,
+          boxShadow:'0 4px 14px rgba(202,101,73,0.4)', transition:'transform .12s' }}
+          onMouseDown={e=>e.currentTarget.style.transform='scale(.9)'}
+          onMouseUp={e=>e.currentTarget.style.transform='scale(1)'}>
+          {playing ? <IconPause s={20}/> : <IconPlay s={20}/>}
+        </button>
+        <SkipBtn label="+30" onClick={()=>onSkip(30)}/>
+      </div>
+
+      {/* Expand */}
+      <button onClick={onOpen} style={{ background:'none', border:'none', cursor:'pointer',
+        color:'var(--muted)', padding:8, flexShrink:0, transition:'color .15s' }}
+        onMouseEnter={e=>e.currentTarget.style.color='var(--text)'}
+        onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>
+        <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M18 15l-6-6-6 6"/></svg>
+      </button>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// AUTH MODAL
+// ══════════════════════════════════════════════════════════════════
+function AuthModal({ onClose }) {
+  const GoogleIcon = () => (
+    <svg width={18} height={18} viewBox="0 0 24 24">
+      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+    </svg>
+  );
+  const AppleIcon = () => (
+    <svg width={17} height={17} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+    </svg>
+  );
+
+  return (
+    <div style={{ position:'fixed', inset:0, zIndex:1000, background:'rgba(28,20,16,0.45)', backdropFilter:'blur(4px)',
+      display:'flex', alignItems:'center', justifyContent:'center' }}
+      onClick={onClose}>
+      <div style={{ background:'var(--surface)', borderRadius:20, padding:'36px 32px', width:380, maxWidth:'90vw',
+        boxShadow:'0 24px 80px rgba(28,20,16,0.22)', position:'relative',
+        animation:'modalIn .25s cubic-bezier(.22,.68,0,1.2) both' }}
+        onClick={e=>e.stopPropagation()}>
+
+        <button onClick={onClose} style={{ position:'absolute', top:16, right:16, width:32, height:32, borderRadius:'50%',
+          border:'none', background:'rgba(0,0,0,0.06)', cursor:'pointer', color:'var(--muted)',
+          display:'flex', alignItems:'center', justifyContent:'center', fontSize:16 }}>×</button>
+
+        <div style={{ width:48, height:48, borderRadius:14, background:'var(--text)', margin:'0 auto 20px',
+          display:'flex', alignItems:'center', justifyContent:'center' }}>
+          <IconMic s={24} c='var(--bg)'/>
+        </div>
+
+        <h2 className="serif" style={{ fontSize:26, fontWeight:400, textAlign:'center', marginBottom:8, color:'var(--text)' }}>
+          Welcome to Audia
+        </h2>
+        <p style={{ fontSize:14, color:'var(--muted)', textAlign:'center', marginBottom:28, lineHeight:1.6 }}>
+          Sign in to save your episodes and listen across all your devices.
+        </p>
+
+        {/* Google */}
+        <button style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:10,
+          padding:'12px 16px', borderRadius:10, border:'1px solid var(--border)',
+          background:'white', cursor:'pointer', fontSize:14, fontWeight:500, color:'#1c1410',
+          marginBottom:10, transition:'all .15s' }}
+          onMouseEnter={e=>{ e.currentTarget.style.borderColor='#4285F4'; e.currentTarget.style.boxShadow='0 2px 8px rgba(66,133,244,0.2)'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.boxShadow='none'; }}
+          onClick={()=>{ console.log('Google sign in'); onClose(); }}>
+          <GoogleIcon/> Continue with Google
+        </button>
+
+        {/* Apple */}
+        <button style={{ width:'100%', display:'flex', alignItems:'center', justifyContent:'center', gap:10,
+          padding:'12px 16px', borderRadius:10, border:'1px solid #1c1410',
+          background:'#1c1410', cursor:'pointer', fontSize:14, fontWeight:500, color:'white',
+          marginBottom:20, transition:'opacity .15s' }}
+          onMouseEnter={e=>e.currentTarget.style.opacity='.88'}
+          onMouseLeave={e=>e.currentTarget.style.opacity='1'}
+          onClick={()=>{ console.log('Apple sign in'); onClose(); }}>
+          <AppleIcon/> Continue with Apple
+        </button>
+
+        <div style={{ display:'flex', alignItems:'center', gap:12, marginBottom:20 }}>
+          <div style={{ flex:1, height:1, background:'var(--border)' }}/>
+          <span style={{ fontSize:12, color:'var(--muted)' }}>or</span>
+          <div style={{ flex:1, height:1, background:'var(--border)' }}/>
+        </div>
+
+        <button style={{ width:'100%', padding:'11px', borderRadius:10, border:'1px solid var(--border)',
+          background:'transparent', cursor:'pointer', fontSize:14, color:'var(--muted)',
+          transition:'all .15s' }}
+          onMouseEnter={e=>{ e.currentTarget.style.borderColor='var(--accent)'; e.currentTarget.style.color='var(--accent)'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.color='var(--muted)'; }}
+          onClick={()=>{ console.log('email sign in'); onClose(); }}>
+          Continue with email
+        </button>
+
+        <p className="mono" style={{ fontSize:10, color:'var(--muted)', textAlign:'center', marginTop:20, lineHeight:1.6 }}>
+          By continuing you agree to our Terms of Service and Privacy Policy.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// SIDEBAR
+// ══════════════════════════════════════════════════════════════════
+function Sidebar({ activeView, onNav, onSignIn, isSignedIn, episodeCount }) {
+  const items = [
+    { id:'explore',  label:'Explore',  Icon:IconExplore  },
+    { id:'library',  label:'Library',  Icon:IconLibrary, badge: episodeCount||null },
+    { id:'profile',  label:'Profile',  Icon:IconProfile  },
+    { id:'settings', label:'Settings', Icon:IconSettings },
+  ];
+
+  return (
+    <div style={{ position:'fixed', left:0, top:4, bottom:0, width:'var(--sidebar)', zIndex:100,
+      background:'var(--surface)', borderRight:'1px solid var(--border)',
+      display:'flex', flexDirection:'column', padding:'16px 12px' }}>
+
+      {/* Logo */}
+      <div style={{ display:'flex', alignItems:'center', gap:9, padding:'6px 4px 20px' }}>
+        <div style={{ width:32, height:32, borderRadius:9, background:'var(--text)',
+          display:'flex', alignItems:'center', justifyContent:'center', flexShrink:0 }}>
+          <IconMic s={16} c='var(--bg)'/>
+        </div>
+        <div>
+          <div className="serif" style={{ fontSize:17, lineHeight:1.1 }}>Audia</div>
+          <div className="mono" style={{ fontSize:9, color:'var(--muted)', letterSpacing:'.06em' }}>AI PODCAST</div>
+        </div>
+      </div>
+
+      {/* Nav */}
+      <nav style={{ display:'flex', flexDirection:'column', gap:2, flex:1 }}>
+        {items.map(({id,label,Icon,badge})=>(
+          <button key={id} className={`sb-item${activeView===id?' active':''}`} onClick={()=>onNav(id)}>
+            <Icon s={17}/>
+            <span style={{ flex:1 }}>{label}</span>
+            {badge > 0 && (
+              <span style={{ fontSize:10, background:'var(--alight)', color:'var(--accent)',
+                padding:'2px 6px', borderRadius:99, fontWeight:600 }}>{badge}</span>
+            )}
+          </button>
+        ))}
+      </nav>
+
+      {/* Bottom: stats + sign in */}
+      <div>
+        <div className="mono" style={{ fontSize:10, color:'var(--muted)', padding:'0 4px 14px', lineHeight:1.7 }}>
+          60K+ topics generated
+        </div>
+        <button onClick={onSignIn} style={{ width:'100%', padding:'10px', borderRadius:10,
+          border:'1px solid var(--border)', background:'transparent',
+          cursor:'pointer', fontSize:13, fontWeight:500, color:'var(--text)', transition:'all .15s' }}
+          onMouseEnter={e=>{ e.currentTarget.style.background='var(--alight)'; e.currentTarget.style.borderColor='var(--accent)'; e.currentTarget.style.color='var(--accent)'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.background='transparent'; e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.color='var(--text)'; }}>
+          {isSignedIn ? '👤 My Account' : 'Sign In'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ── Cycling placeholder ───────────────────────────────────────────
+function useCyclingPlaceholder(topics, interval=3500) {
+  const [idx, setIdx] = useState(0);
+  useEffect(()=>{ const t=setInterval(()=>setIdx(i=>(i+1)%topics.length),interval); return()=>clearInterval(t); },[]);
+  return topics[idx];
+}
+
+// ══════════════════════════════════════════════════════════════════
+// EXPLORE VIEW (main generator — stripped down, personality-first)
+// ══════════════════════════════════════════════════════════════════
+function ExploreView({ onGenerate }) {
+  const [idea, setIdea]       = useState('');
+  const [focused, setFocused] = useState(false);
+  const placeholder = useCyclingPlaceholder(PLACEHOLDER_TOPICS);
+
+  const submit = () => { if(idea.trim()) onGenerate(idea.trim()); };
+
+  return (
+    <div style={{ height:'100%', overflowY:'auto', paddingBottom:120 }}>
+      <div style={{ maxWidth:720, margin:'0 auto', padding:'80px 40px 0' }}>
+
+        <div className="fade-up" style={{ marginBottom:52 }}>
+          <h1 className="serif" style={{ fontSize:'clamp(44px,6vw,72px)', fontWeight:400,
+            lineHeight:1.08, letterSpacing:'-0.03em', marginBottom:20, color:'var(--text)' }}>
+            What do you want<br/>to hear about?
+          </h1>
+          <p style={{ fontSize:16, color:'var(--muted)', lineHeight:1.8, maxWidth:440 }}>
+            Type any topic. We'll make you a podcast episode, just for you, in minutes.
+          </p>
+        </div>
+
+        {/* Input */}
+        <div className="fade-up" style={{ animationDelay:'.06s', marginBottom:20 }}>
+          <div style={{ background:'var(--surface)', borderRadius:16,
+            border:`1.5px solid ${focused?'var(--accent)':'var(--border)'}`,
+            boxShadow: focused ? '0 0 0 3px rgba(202,101,73,0.12), 0 4px 20px rgba(0,0,0,0.06)' : '0 2px 12px rgba(0,0,0,0.05)',
+            transition:'border-color .2s, box-shadow .2s', overflow:'hidden' }}>
+            <textarea rows={4} value={idea}
+              placeholder={focused ? 'What would you like a podcast about?' : placeholder}
+              onFocus={()=>setFocused(true)}
+              onBlur={()=>setFocused(false)}
+              onChange={e=>setIdea(e.target.value)}
+              onKeyDown={e=>{ if(e.key==='Enter'&&(e.metaKey||e.ctrlKey)) submit(); }}
+              style={{ width:'100%', padding:'22px 22px 14px', border:'none',
+                background:'transparent', fontSize:16, lineHeight:1.7, color:'var(--text)' }}/>
+            <div style={{ display:'flex', alignItems:'center', justifyContent:'flex-end',
+              padding:'10px 16px 16px', borderTop:'1px solid var(--border)', gap:10 }}>
+              <span className="mono" style={{ fontSize:11, color:'var(--muted)' }}>⌘ Return</span>
+              <button onClick={submit} disabled={!idea.trim()} style={{
+                padding:'11px 28px', background:idea.trim()?'var(--text)':'var(--border)',
+                color:idea.trim()?'var(--bg)':'var(--muted)', borderRadius:10, border:'none',
+                cursor:idea.trim()?'pointer':'default', fontSize:14, fontWeight:600,
+                display:'flex', alignItems:'center', gap:7, transition:'all .18s',
+                boxShadow:idea.trim()?'0 4px 14px rgba(28,20,16,0.18)':'none' }}
+                onMouseDown={e=>{ if(idea.trim()) e.currentTarget.style.transform='scale(.97)'; }}
+                onMouseUp={e=>e.currentTarget.style.transform='scale(1)'}>
+                Create episode
+                <svg width={14} height={14} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Topic chips */}
+        <div className="fade-up" style={{ animationDelay:'.1s', display:'flex', flexWrap:'wrap', gap:8 }}>
+          {TOPICS.slice(0,8).map(t=>(
+            <button key={t.topic} className="chip" onClick={()=>onGenerate(t.topic)}>{t.topic}</button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// LIBRARY VIEW
+// ══════════════════════════════════════════════════════════════════
+function LibraryView({ history, onSelect, activePodcastId, playing }) {
+  if(history.length === 0) {
+    return (
+      <div style={{ height:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:'40px', textAlign:'center' }}>
+        <div style={{ width:64, height:64, borderRadius:16, background:'var(--surface)', border:'1px solid var(--border)',
+          display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 20px' }}>
+          <IconLibrary s={28}/>
+        </div>
+        <h2 className="serif" style={{ fontSize:26, fontWeight:400, marginBottom:10, color:'var(--text)' }}>No episodes yet</h2>
+        <p style={{ fontSize:14, color:'var(--muted)', lineHeight:1.7 }}>Head to Explore and generate your first episode.<br/>Everything you create lives here.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ height:'100%', overflowY:'auto', paddingBottom:120 }}>
+      <div style={{ maxWidth:720, margin:'0 auto', padding:'52px 40px 0' }}>
+        <h2 className="serif" style={{ fontSize:32, fontWeight:400, marginBottom:6, color:'var(--text)' }}>Your Library</h2>
+        <p style={{ fontSize:14, color:'var(--muted)', marginBottom:32 }}>{history.length} episode{history.length!==1?'s':''}</p>
+        <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+          {history.map(pod=>{
+            const isActive = activePodcastId===pod.id;
+            return (
+              <button key={pod.id} onClick={()=>onSelect(pod)}
+                style={{ display:'flex', alignItems:'center', gap:16, padding:'14px 18px', borderRadius:12,
+                  border:`1px solid ${isActive?'var(--accent)':'var(--border)'}`,
+                  background:isActive?'var(--alight)':'var(--surface)',
+                  cursor:'pointer', textAlign:'left', fontFamily:'inherit', transition:'all .18s' }}
+                onMouseEnter={e=>{ if(!isActive){e.currentTarget.style.borderColor='var(--accent)';e.currentTarget.style.background='var(--alight)';} }}
+                onMouseLeave={e=>{ if(!isActive){e.currentTarget.style.borderColor='var(--border)';e.currentTarget.style.background='var(--surface)';} }}>
+                <div style={{ width:52, height:52, borderRadius:12, background:pod.color, flexShrink:0,
+                  display:'flex', alignItems:'center', justifyContent:'center' }}>
+                  {isActive && playing ? <WaveBars n={4} h={16} color='white'/> : (
+                    <svg width={18} height={18} viewBox="0 0 40 40" fill="none">
+                      <circle cx="20" cy="20" r="18" fill="white" fillOpacity=".2"/>
+                      <circle cx="20" cy="20" r="6" fill="white" fillOpacity=".55"/>
+                      <circle cx="20" cy="20" r="2" fill="white"/>
+                    </svg>
+                  )}
+                </div>
+                <div style={{ flex:1, minWidth:0 }}>
+                  <div style={{ fontSize:14, fontWeight:500, marginBottom:3, whiteSpace:'nowrap', overflow:'hidden', textOverflow:'ellipsis', color:'var(--text)' }}>{pod.title}</div>
+                  <div className="mono" style={{ fontSize:11, color:'var(--muted)' }}>{pod.createdAt} · {fmt(pod.duration)}</div>
+                </div>
+                <IconChevR s={16}/>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// PROFILE / SETTINGS PLACEHOLDERS
+// ══════════════════════════════════════════════════════════════════
+function PlaceholderView({ icon, title, subtitle, onSignIn }) {
+  return (
+    <div style={{ height:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', padding:40, textAlign:'center' }}>
+      <div style={{ width:64, height:64, borderRadius:16, background:'var(--surface)', border:'1px solid var(--border)',
+        display:'flex', alignItems:'center', justifyContent:'center', margin:'0 auto 20px', fontSize:28 }}>
+        {icon}
+      </div>
+      <h2 className="serif" style={{ fontSize:26, fontWeight:400, marginBottom:10, color:'var(--text)' }}>{title}</h2>
+      <p style={{ fontSize:14, color:'var(--muted)', lineHeight:1.7, maxWidth:320, marginBottom:28 }}>{subtitle}</p>
+      <button onClick={onSignIn} style={{ padding:'11px 28px', background:'var(--text)', color:'var(--bg)',
+        borderRadius:10, border:'none', cursor:'pointer', fontSize:14, fontWeight:600 }}>
+        Sign in to unlock
+      </button>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// GENERATING PAGE
+// ══════════════════════════════════════════════════════════════════
+function GenPage({ idea, onDone }) {
+  const [step, setStep] = useState(0);
+  const [pct,  setPct]  = useState(0);
+  const total = 9000, t0 = useRef(Date.now());
+
+  useEffect(()=>{
+    const iv = setInterval(()=>{
+      const p = Math.min((Date.now()-t0.current)/total, 1);
+      setPct(Math.round(p*100));
+      setStep(Math.min(Math.floor(p*GEN_STEPS.length), GEN_STEPS.length-1));
+      if(p>=1){ clearInterval(iv); setTimeout(onDone,400); }
+    }, 80);
+    return ()=>clearInterval(iv);
+  },[]);
+
+  return (
+    <div style={{ height:'100%', display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', gap:32, padding:'0 40px' }}>
+      <div className="fade-up" style={{ textAlign:'center', maxWidth:460 }}>
+        <div style={{ position:'relative', width:88, height:88, margin:'0 auto 28px' }}>
+          <div style={{ position:'absolute', inset:0, borderRadius:'50%',
+            background:'conic-gradient(from 0deg,#ef4444,#f97316,#eab308,#22c55e,#3b82f6,#8b5cf6,#ef4444)',
+            animation:'spin 1.2s linear infinite' }}/>
+          <div style={{ position:'absolute', inset:4, borderRadius:'50%', background:'var(--bg)',
+            display:'flex', alignItems:'center', justifyContent:'center' }}>
+            <IconMic s={24} c='var(--text)'/>
+          </div>
+        </div>
+        <h2 className="serif" style={{ fontSize:26, fontWeight:400, marginBottom:10, color:'var(--text)' }}>Making your episode</h2>
+        <p style={{ fontSize:14, color:'var(--muted)', fontStyle:'italic', marginBottom:22, lineHeight:1.6 }}>"{idea}"</p>
+        <div className="mono" style={{ fontSize:12, color:'var(--accent)', animation:'pulse 1.4s ease-in-out infinite', minHeight:20 }}>{GEN_STEPS[step]}</div>
+      </div>
+      <div className="fade-up" style={{ width:'100%', maxWidth:420, animationDelay:'.12s' }}>
+        <div style={{ height:4, borderRadius:6, background:'var(--border)', overflow:'hidden', marginBottom:8 }}>
+          <div style={{ height:'100%', borderRadius:6, background:'var(--accent)', width:`${pct}%`, transition:'width .12s linear' }}/>
+        </div>
+        <div className="mono" style={{ display:'flex', justifyContent:'space-between', fontSize:11, color:'var(--muted)' }}>
+          <span>Step {step+1} of {GEN_STEPS.length}</span><span>{pct}%</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// PLAYER PAGE
+// ══════════════════════════════════════════════════════════════════
+function PlayerPage({ podcast, playing, progress, speed, onPlayPause, onSkip, onSetProgress, onSetSpeed, onBack }) {
+  const speeds = [0.75, 1, 1.25, 1.5, 2];
+  return (
+    <div style={{ height:'100%', overflowY:'auto', paddingBottom:100, position:'relative' }}>
+      <div style={{ position:'fixed', inset:0, pointerEvents:'none', zIndex:0,
+        background:`${podcast.color}08`, transition:'background .6s' }}/>
+
+      <nav style={{ position:'relative', zIndex:1, padding:'0 28px', height:58,
+        display:'flex', alignItems:'center', justifyContent:'space-between' }}>
+        <button onClick={onBack} style={{ display:'flex', alignItems:'center', gap:5, border:'none',
+          background:'none', cursor:'pointer', color:'var(--muted)', fontSize:13, padding:'8px 0', transition:'color .15s' }}
+          onMouseEnter={e=>e.currentTarget.style.color='var(--text)'}
+          onMouseLeave={e=>e.currentTarget.style.color='var(--muted)'}>
+          <IconChevL s={16}/> Back
+        </button>
+        <span className="mono" style={{ fontSize:11, letterSpacing:'.1em', textTransform:'uppercase', color:'var(--muted)' }}>Now Playing</span>
+        <div style={{ width:64 }}/>
+      </nav>
+
+      <div className="fade-up" style={{ display:'flex', flexDirection:'column', alignItems:'center',
+        padding:'8px 40px 0', maxWidth:520, margin:'0 auto', position:'relative', zIndex:1 }}>
+        <AlbumArt color={podcast.color} size={210}/>
+
+        <div style={{ textAlign:'center', marginTop:28, width:'100%' }}>
+          <div className="serif" style={{ fontSize:24, fontWeight:400, lineHeight:1.25, marginBottom:8 }}>{podcast.title}</div>
+          <div style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:8 }}>
+            <span className="mono" style={{ fontSize:11, color:'var(--accent)', fontWeight:500 }}>AI Generated</span>
+            <span style={{ width:3, height:3, borderRadius:'50%', background:'var(--muted)', display:'block' }}/>
+            <span className="mono" style={{ fontSize:11, color:'var(--muted)' }}>{fmt(podcast.duration)}</span>
+          </div>
+        </div>
+
+        {playing && <div style={{ marginTop:18 }}><WaveBars n={12} h={26}/></div>}
+
+        <div style={{ width:'100%', marginTop:playing?18:32 }}>
+          <Scrubber progress={progress} duration={podcast.duration} onChange={onSetProgress}/>
+        </div>
+
+        <div style={{ display:'flex', alignItems:'center', gap:20, marginTop:28 }}>
+          <button onClick={()=>onSkip(-15)} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:3,
+            width:56, height:56, borderRadius:14, border:'none', background:'rgba(0,0,0,0.06)',
+            cursor:'pointer', color:'var(--muted)', transition:'all .15s' }}
+            onMouseEnter={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.1)'; e.currentTarget.style.color='var(--text)'; }}
+            onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.06)'; e.currentTarget.style.color='var(--muted)'; }}>
+            <IconSkip15Back/>
+            <span className="mono" style={{ fontSize:9, fontWeight:600 }}>15s</span>
+          </button>
+
+          <button onClick={onPlayPause} style={{ width:70, height:70, borderRadius:'50%',
+            display:'flex', alignItems:'center', justifyContent:'center',
+            border:'none', background:'var(--accent)', color:'white', cursor:'pointer',
+            boxShadow:'0 6px 24px rgba(202,101,73,0.4)', transition:'transform .12s' }}
+            onMouseDown={e=>e.currentTarget.style.transform='scale(.92)'}
+            onMouseUp={e=>e.currentTarget.style.transform='scale(1)'}>
+            {playing ? <IconPause s={28}/> : <IconPlay s={28}/>}
+          </button>
+
+          <button onClick={()=>onSkip(30)} style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:3,
+            width:56, height:56, borderRadius:14, border:'none', background:'rgba(0,0,0,0.06)',
+            cursor:'pointer', color:'var(--muted)', transition:'all .15s' }}
+            onMouseEnter={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.1)'; e.currentTarget.style.color='var(--text)'; }}
+            onMouseLeave={e=>{ e.currentTarget.style.background='rgba(0,0,0,0.06)'; e.currentTarget.style.color='var(--muted)'; }}>
+            <IconSkip30Fwd/>
+            <span className="mono" style={{ fontSize:9, fontWeight:600 }}>30s</span>
+          </button>
+        </div>
+
+        <div style={{ display:'flex', gap:6, marginTop:24, alignItems:'center' }}>
+          <span className="mono" style={{ fontSize:11, color:'var(--muted)', marginRight:3 }}>Speed</span>
+          {speeds.map(s=>(
+            <button key={s} onClick={()=>onSetSpeed(s)} style={{ padding:'5px 12px', borderRadius:20,
+              border:`1px solid ${speed===s?'var(--accent)':'var(--border)'}`,
+              background:speed===s?'var(--alight)':'transparent',
+              color:speed===s?'var(--accent)':'var(--muted)',
+              fontSize:12, fontWeight:speed===s?600:400, cursor:'pointer',
+              fontFamily:"'DM Mono',monospace", transition:'all .15s' }}>
+              {s}×
+            </button>
+          ))}
+        </div>
+
+        <button onClick={onBack} style={{ marginTop:30, padding:'10px 24px', borderRadius:24,
+          border:'1px solid var(--border)', background:'transparent', color:'var(--muted)',
+          fontSize:13, cursor:'pointer', fontFamily:'inherit', transition:'all .18s' }}
+          onMouseEnter={e=>{ e.currentTarget.style.borderColor='var(--accent)'; e.currentTarget.style.color='var(--accent)'; }}
+          onMouseLeave={e=>{ e.currentTarget.style.borderColor='var(--border)'; e.currentTarget.style.color='var(--muted)'; }}>
+          + Generate another
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// ══════════════════════════════════════════════════════════════════
+// ROOT APP
+// ══════════════════════════════════════════════════════════════════
+function App() {
+  const [tweaks, setTweaks]       = useState(TWEAK_DEFAULTS);
+  const [page, setPage]           = useState('home');
+  const [sidebarView, setSidebarView] = useState('explore');
+  const [showAuth, setShowAuth]   = useState(false);
+  const [isSignedIn, setIsSignedIn] = useState(false);
+  const [genIdea, setGenIdea]     = useState('');
+  const [podcast, setPodcast]     = useState(null);
+  const [history, setHistory]     = useState([]);
+  const [playing, setPlaying]     = useState(false);
+  const [progress, setProgress]   = useState(0);
+  const [speed, setSpeed]         = useState(1);
+  const timerRef                  = useRef(null);
+
+  // Persist state
+  useEffect(()=>{
+    try{
+      const s = JSON.parse(localStorage.getItem('audia_v2')||'{}');
+      if(s.history) setHistory(s.history);
+      if(s.podcast){ setPodcast(s.podcast); setProgress(s.progress||0); setSpeed(s.speed||1); }
+    }catch(e){}
+  },[]);
+  useEffect(()=>{
+    localStorage.setItem('audia_v2', JSON.stringify({history,podcast,progress,speed}));
+  },[history,podcast,progress,speed]);
+
+  // Playback timer
+  useEffect(()=>{
+    if(playing&&podcast){
+      timerRef.current = setInterval(()=>{
+        setProgress(p=>{ if(p>=podcast.duration){setPlaying(false);return 0;} return p+speed; });
+      },1000);
+    } else clearInterval(timerRef.current);
+    return ()=>clearInterval(timerRef.current);
+  },[playing,speed,podcast]);
+
+  // Mini-player seek via custom event
+  useEffect(()=>{
+    const handler = e => setProgress(e.detail);
+    window.addEventListener('miniseek', handler);
+    return ()=>window.removeEventListener('miniseek', handler);
+  },[]);
+
+  const handleGenerate = idea => { setGenIdea(idea); setPage('generating'); setPlaying(false); setSidebarView('explore'); };
+  const handleGenDone  = () => {
+    const pod = makePodcast(genIdea);
+    setHistory(h=>[pod,...h].slice(0,40));
+    setPodcast(pod); setProgress(0); setPlaying(true); setPage('player');
+  };
+  const handleSelectPod = pod => {
+    if(podcast?.id!==pod.id){ setPodcast(pod); setProgress(0); setPlaying(true); }
+    setPage('player');
+  };
+  const skip = s => setProgress(p=>Math.max(0,Math.min(podcast?.duration||0,p+s)));
+
+  const handleSidebarNav = view => {
+    setSidebarView(view);
+    if(page==='generating' || page==='player') setPage('home');
+  };
+
+  // Tweak system
+  useEffect(()=>{
+    const h = e => {
+      if(e.data?.type==='__activate_edit_mode')   document.getElementById('tweaks')?.style && (document.getElementById('tweaks').style.display='block');
+      if(e.data?.type==='__deactivate_edit_mode') document.getElementById('tweaks')?.style && (document.getElementById('tweaks').style.display='none');
+    };
+    window.addEventListener('message',h);
+    window.parent.postMessage({type:'__edit_mode_available'},'*');
+    return ()=>window.removeEventListener('message',h);
+  },[]);
+  useEffect(()=>{
+    document.documentElement.style.setProperty('--accent', tweaks.accentColor);
+    document.documentElement.style.setProperty('--bg',     tweaks.bgColor);
+  },[tweaks]);
+
+  const showMini = podcast && page!=='player';
+
+  // Which view to show in main content
+  const renderMain = () => {
+    if(page==='generating') return <GenPage idea={genIdea} onDone={handleGenDone}/>;
+    if(page==='player' && podcast) return (
+      <PlayerPage podcast={podcast} playing={playing} progress={progress} speed={speed}
+        onPlayPause={()=>setPlaying(p=>!p)} onSkip={skip} onSetProgress={setProgress} onSetSpeed={setSpeed}
+        onBack={()=>setPage('home')}/>
+    );
+    // page === 'home', switch on sidebarView
+    if(sidebarView==='library') return <LibraryView history={history} onSelect={handleSelectPod} activePodcastId={podcast?.id} playing={playing}/>;
+    if(sidebarView==='profile') return <PlaceholderView icon={<IconProfile s={28}/>} title="Your Profile" subtitle="Sign in to access your profile, listening history, and preferences." onSignIn={()=>setShowAuth(true)}/>;
+    if(sidebarView==='settings') return <PlaceholderView icon={<IconSettings s={28}/>} title="Settings" subtitle="Sign in to customise your voice preferences, language settings, and more." onSignIn={()=>setShowAuth(true)}/>;
+    return <ExploreView onGenerate={handleGenerate}/>;
+  };
+
+  return (
+    <div style={{ height:'100vh', display:'flex', flexDirection:'column', fontSize:tweaks.fontSize, overflow:'hidden' }}>
+
+      {/* Rainbow bar */}
+      <div style={{ height:4, flexShrink:0, background:'linear-gradient(to right,#ef4444,#f97316,#eab308,#22c55e,#3b82f6,#8b5cf6)' }}/>
+
+      {/* Body: sidebar + content */}
+      <div style={{ flex:1, display:'flex', overflow:'hidden', position:'relative' }}>
+
+        <Sidebar
+          activeView={page==='player'?'library':sidebarView}
+          onNav={handleSidebarNav}
+          onSignIn={()=>setShowAuth(true)}
+          isSignedIn={isSignedIn}
+          episodeCount={history.length}
+        />
+
+        {/* Main content */}
+        <div style={{ flex:1, marginLeft:'var(--sidebar)', overflow:'hidden', background:'var(--bg)' }}>
+          {renderMain()}
+        </div>
+      </div>
+
+      {/* Mini player */}
+      {showMini && (
+        <MiniPlayer
+          podcast={podcast} playing={playing} progress={progress}
+          onPlayPause={()=>setPlaying(p=>!p)}
+          onSkip={skip}
+          onOpen={()=>setPage('player')}
+        />
+      )}
+
+      {/* Auth modal */}
+      {showAuth && <AuthModal onClose={()=>setShowAuth(false)}/>}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+</script>
+</body>
+</html>

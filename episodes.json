@@ -1,0 +1,433 @@
+[
+  {
+    "id": "916e09ac-52b4-437b-8d7d-6a9c564d5eef",
+    "topic": "Why do we dream?",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-22T12:39:15.570Z",
+    "audioUrl": "/episodes/916e09ac-52b4-437b-8d7d-6a9c564d5eef.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"Why do we dream?\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "fd7d14d4-b33c-4650-b836-2dc5874224ec",
+    "topic": "Tell me something fascinating about Tech & AI",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T18:32:29.219Z",
+    "audioUrl": "/episodes/fd7d14d4-b33c-4650-b836-2dc5874224ec.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"Tell me something fascinating about Tech & AI\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "66e0b2e4-04b6-4662-a732-2a1f6160abf4",
+    "topic": "Tell me something fascinating about Mind",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T18:30:25.121Z",
+    "audioUrl": "/episodes/66e0b2e4-04b6-4662-a732-2a1f6160abf4.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"Tell me something fascinating about Mind\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "b07060dc-2053-4640-8a08-563e5545811c",
+    "topic": "Tell me something fascinating about Tech & AI",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T18:26:02.005Z",
+    "audioUrl": "/episodes/b07060dc-2053-4640-8a08-563e5545811c.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"Tell me something fascinating about Tech & AI\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "58078622-21e1-4e26-9259-ea7346ca7292",
+    "topic": "tell me a \nb project management",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T11:51:42.146Z",
+    "audioUrl": "/episodes/58078622-21e1-4e26-9259-ea7346ca7292.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"tell me a \nb project management\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "601b0b20-cd71-4e13-8afe-82672f5899a8",
+    "topic": "power of ai",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T11:02:27.474Z",
+    "audioUrl": "/episodes/601b0b20-cd71-4e13-8afe-82672f5899a8.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"power of ai\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "a9a69534-c633-4a93-b762-43efd383cecb",
+    "topic": "Tell me something fascinating about Tech & AI",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:59:10.627Z",
+    "audioUrl": "/episodes/a9a69534-c633-4a93-b762-43efd383cecb.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "summary": "An AI-generated exploration of \"Tell me something fascinating about Tech & AI\" — Alex and Jamie break down the key ideas, surprising facts, and real-world implications in a natural back-and-forth conversation.",
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "802d546c-ca3e-44f0-80f7-941af23c6d47",
+    "topic": "What most people get wrong about power of ai",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:45:06.522Z",
+    "audioUrl": "/episodes/802d546c-ca3e-44f0-80f7-941af23c6d47.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "4735b8c8-b997-435e-b063-32b4a6fd1702",
+    "topic": "power of ai",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:42:48.572Z",
+    "audioUrl": "/episodes/4735b8c8-b997-435e-b063-32b4a6fd1702.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "b3b5be84-0d82-4157-83a5-b40b8f1c6322",
+    "topic": "Differentiation & integration explained",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:28:57.068Z",
+    "audioUrl": "/episodes/b3b5be84-0d82-4157-83a5-b40b8f1c6322.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "a82e0749-7a57-4567-afe0-dabd2f615463",
+    "topic": "Inflation, interest rates & monetary policy",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:28:10.396Z",
+    "audioUrl": "/episodes/a82e0749-7a57-4567-afe0-dabd2f615463.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "2e3e61c3-6cbd-46f8-8d70-d811ea33be23",
+    "topic": "How supply and demand works",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:27:48.903Z",
+    "audioUrl": "/episodes/2e3e61c3-6cbd-46f8-8d70-d811ea33be23.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "57c46f11-8fe3-4d9b-8b18-9b2d276d0979",
+    "topic": "Differentiation & integration explained",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:26:02.232Z",
+    "audioUrl": "/episodes/57c46f11-8fe3-4d9b-8b18-9b2d276d0979.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "85be28b9-9e92-4731-adad-c6fa034a47fd",
+    "topic": "How supply and demand works",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:24:26.356Z",
+    "audioUrl": "/episodes/85be28b9-9e92-4731-adad-c6fa034a47fd.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "ab265852-ba37-498e-bf57-675b407545d0",
+    "topic": "test topic",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-21T10:23:52.437Z",
+    "audioUrl": "/episodes/ab265852-ba37-498e-bf57-675b407545d0.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "fd138b71-6158-43e0-9bb1-a4ccb76a8cee",
+    "topic": "How to build and monetize a website with Claude Code",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-12T19:56:30.057Z",
+    "audioUrl": "/episodes/fd138b71-6158-43e0-9bb1-a4ccb76a8cee.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "28bbae2d-27bc-4fdb-afe0-a4cb1c85a607",
+    "topic": "How to start investing with $1000 in 2026",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-12T19:53:37.965Z",
+    "audioUrl": "/episodes/28bbae2d-27bc-4fdb-afe0-a4cb1c85a607.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "8fcb23eb-418e-42f7-87c6-201637e6fa48",
+    "topic": "How AI is changing the future of investing",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate [MOCK]",
+    "createdAt": "2026-04-12T19:37:56.649Z",
+    "audioUrl": "/episodes/8fcb23eb-418e-42f7-87c6-201637e6fa48.mp3",
+    "fileSizeBytes": 12317,
+    "sources": [
+      {
+        "title": "Mock Article 1 — AI in Finance",
+        "url": "https://example.com/1"
+      },
+      {
+        "title": "Mock Article 2 — Investing Trends",
+        "url": "https://example.com/2"
+      }
+    ],
+    "script": "HOST1: This is a mock episode.\nHOST2: No API credits were used."
+  },
+  {
+    "id": "a92dd844-afac-4a87-b2c5-2a221e429964",
+    "topic": "How AI is changing the future of investing",
+    "format": "interview",
+    "formatLabel": "Interview",
+    "createdAt": "2026-04-12T19:34:29.935Z",
+    "audioUrl": "/episodes/a92dd844-afac-4a87-b2c5-2a221e429964.mp3",
+    "fileSizeBytes": 5570181,
+    "sources": [
+      {
+        "title": "AI: Redefining the Future of Investment | Shaped",
+        "url": "https://www.shaped.ai/blog/ai-redefining-the-future-of-investment"
+      },
+      {
+        "title": "How AI Is Changing The Investing World | Damián Scavo",
+        "url": "https://www.linkedin.com/posts/dscavo_how-ai-is-changing-the-investing-world-activity-7166489313881399296-Nbm1"
+      },
+      {
+        "title": "AI in Wealth Management: Future of Smart Investing",
+        "url": "https://www.blissmoney.in/blog/how-ai-is-transforming-wealth-management-the-future-of-smart-investing"
+      },
+      {
+        "title": "The rise of AI and its impact within the investment industry",
+        "url": "https://www.cfauk.org/pi-listing/the-rise-of-ai-and-its-impact-within-the-investment-industry"
+      },
+      {
+        "title": "7 Ways AI Can Revolutionize Investment Strategy",
+        "url": "https://www.investopedia.com/using-ai-to-transform-investment-strategy-8778945"
+      }
+    ],
+    "script": "INTERVIEWER: What if I told you that the way you invest your money is about to become completely unrecognizable within the next decade — and that most people have absolutely no idea it's already happening?\n\nGUEST: That's not even an exaggeration. We are genuinely in the middle of one of the most significant transformations in financial history, and it's moving faster than almost anyone anticipated.\n\nINTERVIEWER: I'm your host, and today we're diving deep into how artificial intelligence is rewriting the rules of investing. My guest has spent years at the intersection of technology and finance, and I cannot wait to get into this. Welcome to the show.\n\nGUEST: Great to be here. This is genuinely one of my favorite topics to talk about, so I'll try not to just monologue for forty-five minutes.\n\nINTERVIEWER: No promises that I'll stop you. Let's start at the very beginning though, because I think a lot of people hear \"AI in investing\" and they think — okay, a robot is picking my stocks. Is that actually what's happening?\n\nGUEST: That's the Hollywood version, right? The Terminator but instead of hunting Sarah Connor, it's buying Tesla shares. The reality is both more mundane and, honestly, way more interesting than that.\n\nGUEST: What AI is actually doing right now is processing information at a scale that no human team could ever match. We're talking about aggregating structured data like market prices, earnings reports, economic indicators — and unstructured data like news articles, earnings call transcripts, even social media sentiment — all simultaneously, in real time.\n\nINTERVIEWER: So it's less about replacing the stock picker and more about giving the stock picker a superpower?\n\nGUEST: Exactly. Think about a traditional equity analyst. They might cover fifteen to twenty companies. They read the filings, they model the financials, they build their thesis. That process takes days, sometimes weeks. AI can do a comparable first-pass analysis in minutes.\n\nINTERVIEWER: Minutes. That's wild. What's actually enabling that? Like, what changed technically that made this possible?\n\nGUEST: A few things converged at once. You had the explosion of large language models — the same technology behind things like ChatGPT — being applied to financial data. There's actually a system called FinRobot, developed with research from the AI4 Finance Foundation and Stanford University, that specifically uses large language models to automate equity research workflows.\n\nGUEST: And then J.P. Morgan's AI Research division has been building custom platforms to streamline deal sourcing, valuation, all of that. The big institutional players are not waiting around. They are building this infrastructure right now.\n\nINTERVIEWER: So the big banks and funds are already doing this. What about, say, a normal person with a brokerage account? Is any of this trickling down to retail investors?\n\nGUEST: It is, and faster than most people realize. The robo-advisor space — think Betterment, Wealthfront, that category — that was the first wave. Relatively simple algorithm-driven portfolio allocation. But what's coming next is genuinely more sophisticated.\n\nGUEST: We're starting to see AI systems that give hyper-personalized recommendations. And I mean that literally — not just \"you're thirty-two so you should hold sixty percent equities.\" I'm talking about systems that look at your entire financial picture, your income patterns, your spending behavior, even your career situation.\n\nINTERVIEWER: Okay, you have to give me an example of that, because that sounds almost creepy.\n\nGUEST: It is a little creepy! But here's a concrete one. Imagine you're a software engineer living in Silicon Valley. An AI system might actually recommend you reduce your exposure to technology stocks — not because tech is a bad sector, but because your human capital, your career, your salary, your job security — is already deeply tied to the tech industry.\n\nGUEST: So if tech crashes, you don't just lose money in the market. You potentially lose your job too. The AI recognizes that correlation and adjusts accordingly. A human advisor could theoretically make that same call, but how many of them actually do it consistently across thousands of clients?\n\nINTERVIEWER: That's genuinely sophisticated thinking. I wouldn't have expected a software system to be reasoning at that level.\n\nGUEST: And it goes further. These systems can analyze your calendar data, your email patterns, detect upcoming life events — a home purchase, a child starting college — and proactively adjust your investment recommendations. Even local economic conditions that might affect your specific employment situation.\n\nINTERVIEWER: Okay, now I'm really feeling watched. Let's talk about the market-level stuff though, because there's this whole world of algorithmic and high-frequency trading that's been around for a while. How does modern AI differ from that?\n\nGUEST: Great distinction to make. Traditional algorithmic trading runs on pre-programmed rules. If price crosses this moving average, buy. If volatility spikes above this threshold, sell. The rules are fixed. They don't learn.\n\nGUEST: Modern AI investment systems use machine learning, which means they actually adapt. They're ingesting new market data continuously and updating their models. The strategy that worked in a low-interest-rate environment might look completely different in a high-rate environment, and the system adjusts without someone manually rewriting the code.\n\nINTERVIEWER: That adaptability sounds like a huge edge. What about risk management specifically? Because I feel like that's where a lot of individual investors really struggle.\n\nGUEST: Risk management might actually be where AI is making the single biggest impact in professional wealth management right now. The wealth management industry has traditionally relied on somewhat static risk models — you run your scenario analysis, you stress-test against historical events like 2008, and you hope the future rhymes with the past.\n\nGUEST: AI enables what we call proactive risk management. The system is continuously monitoring for early warning signals across hundreds of variables simultaneously. Correlations that are shifting, volatility patterns that are changing, geopolitical signals in news feeds — all of it feeding into a real-time risk picture.\n\nINTERVIEWER: And humans just can't do that at that speed.\n\nGUEST: Nobody is sitting there reading every news feed from forty countries at two in the morning. But an AI system doesn't sleep. It's processing everything continuously. The preparedness in volatile and uncertain markets — that's where the real value shows up.\n\nINTERVIEWER: Let's talk about the behavioral side, because I think this is fascinating. Investors make terrible decisions when they're emotional. Fear, greed, panic-selling in a crash. Can AI actually help with that?\n\nGUEST: This might be one of the underappreciated applications. Behavioral finance has documented for decades all the ways human psychology works against good investing. Loss aversion, recency bias, overconfidence, herd mentality. We're wired in ways that are genuinely counterproductive for long-term wealth building.\n\nGUEST: AI doesn't have those psychological vulnerabilities. It doesn't panic when the market drops fifteen percent in a week. It doesn't get greedy and overweight a single hot sector because everyone on social media is talking about it. It just keeps running the model.\n\nINTERVIEWER: Although — and push back on me if I'm wrong — doesn't AI also potentially amplify some of those collective behaviors? Like if everyone's AI is trained on the same data and following similar patterns, does it create its own kind of herd behavior?\n\nGUEST: You are not wrong, and this is actually one of the more serious concerns that researchers and regulators are starting to look at. If you have a large percentage of market participants using similar AI systems making similar decisions at similar speeds, you could get correlated behavior at a scale that creates new kinds of instability.\n\nGUEST: The Flash Crash of 2010 was a preview of what happens when automated systems interact with each other in unexpected ways. And the systems are far more sophisticated and widespread now than they were then.\n\nINTERVIEWER: So the same technology that's supposed to manage risk could potentially create systemic risk.\n\nGUEST: At the market level, absolutely. The individual investor using AI might be better positioned than the investor who isn't. But if the whole market is using similar tools, the collective behavior becomes its own risk factor. It's a genuinely hard problem.\n\nINTERVIEWER: I want to come back to the adoption numbers, because I saw something that honestly stopped me in my tracks. Something like ninety percent of investment managers are either using or planning to use AI?\n\nGUEST: That's from a recent industry survey, yes. Over ninety percent either currently using it or actively planning to. And about fifty-four percent have already incorporated AI in some meaningful way into their strategies. That's not a niche technology anymore. That is becoming table stakes in the industry.\n\nINTERVIEWER: And the market itself — the AI investment sector — what does growth look like?\n\nGUEST: The projections are staggering. We're looking at thirty-six-point-six percent year-on-year growth in AI investment tools and applications through 2030. That's from Grandview Research. To put that in context, almost nothing in finance grows at that rate sustained over that period of time.\n\nINTERVIEWER: That's a compound growth rate that would make Warren Buffett blush.\n\nGUEST: It would! And what's driving it isn't just enthusiasm or hype — although there's certainly some of that. It's genuine productivity gains. When you can do in minutes what used to take weeks, the economics are compelling for any institution.\n\nINTERVIEWER: Speaking of Buffett — and I know this is a bit of a curveball — but how do you square AI investing with something like value investing, which is very much about patient, fundamental human judgment? Does AI even fit there?\n\nGUEST: So Buffett himself has been pretty skeptical of a lot of this, which is worth acknowledging. His approach is so deliberately long-horizon and qualitative in many ways. But here's the thing — even the most conviction-driven fundamental investor benefits from better information processing.\n\nGUEST: If an AI can surface a company that meets every one of your investment criteria — durable competitive moat, honest management, trading at a discount to intrinsic value — but it does it by scanning fifteen thousand companies globally in the time it would take you to read three annual reports, that's additive, not contradictory.\n\nINTERVIEWER: It's like giving the stock picker a better telescope.\n\nGUEST: Exactly. You're still making the judgment call. You're still deciding if the moat is real. But you've dramatically widened your universe of what you can even consider.\n\nINTERVIEWER: Let's talk about the Nvidia story for a second, because that's sort of the flip side of all this. AI isn't just changing how people invest — the AI boom itself has become something people are investing in. And the valuations have gotten... interesting.\n\nGUEST: To put it charitably. Nvidia has become almost the canonical example of what happens when markets try to price a genuinely transformative technology. The stock went from under two hundred dollars to over a thousand in the span of a couple of years. Investors are essentially making a multi-decade bet on the AI infrastructure buildout.\n\nGUEST: And some of those bets will prove prescient and some will prove to be extraordinary examples of exuberance. We've seen this movie before with railroads, with the internet. The technology turns out to be real, transformative, world-changing — and a significant portion of the early investors still lose money because they overpay or back the wrong company.\n\nINTERVIEWER: So even if you believe AI is going to be huge, picking the winners is hard.\n\nGUEST: Picking the winners is always hard. That's kind of the whole game, right? AI might help you analyze the landscape better, but the fundamental challenge of investing — uncertainty about the future — that doesn't go away.\n\nINTERVIEWER: I want to ask you about something that doesn't get talked about enough in these conversations, which is the people side. There are a lot of financial professionals whose jobs are being affected by this. What does the human workforce in finance actually look like in a world of widespread AI adoption?\n\nGUEST: This is a real transition happening right now. Certain roles are definitely at risk of significant reduction. Junior analysts who spend most of their time aggregating data, running basic models, producing first-draft research — AI is very good at exactly those tasks.\n\nGUEST: But the more senior, more judgment-intensive work — understanding a management team's credibility, reading the competitive dynamics of an industry, making the contrarian call when the data says one thing but you sense something the model doesn't capture — that is much harder to automate.\n\nINTERVIEWER: So it rewards the people who are genuinely adding unique judgment, not just processing power.\n\nGUEST: And it rewards people who know how to work with AI effectively. The CFA UK — the Chartered Financial Analyst organization in the UK — is actually hosting a conference specifically around AI skills for investment professionals this June. Because they recognize that the professionals who can integrate AI into their workflows are going to have a significant edge over those who can't.\n\nGUEST: It's a bit like the shift to spreadsheets in the eighties. The analysts who learned Excel didn't just survive — they became dramatically more productive. The ones who resisted it got left behind.\n\nINTERVIEWER: That's a really useful frame. It's not humans versus AI, it's humans with AI versus humans without.\n\nGUEST: That's the competitive reality for the next decade in financial services, yes.\n\nINTERVIEWER: What about the regulation angle? Because this feels like it's moving faster than any regulatory framework can keep up with.\n\nGUEST: Oh, it is absolutely outpacing regulation. And that creates real risks. When you have AI systems making consequential financial decisions — managing retirement savings, executing trades, giving personalized investment advice — you need accountability frameworks that just don't fully exist yet.\n\nGUEST: Who's responsible when an AI-driven portfolio strategy blows up? The firm that deployed it? The company that built the model? The regulators in most jurisdictions are still working through these questions. The EU is furthest along with their AI Act, but financial services-specific frameworks are still very much a work in progress.\n\nINTERVIEWER: And in the meantime, what should individual investors know to protect themselves?\n\nGUEST: A few things. First, understand that the AI tools you're being offered are only as good as the data they were trained on and the assumptions built into the model. Transparency matters. If a tool can't explain why it's making a recommendation, that's a yellow flag.\n\nGUEST: Second, AI is great at pattern recognition in historical data. It is not great at predicting genuinely novel situations — things like a pandemic, a new kind of geopolitical conflict, a completely unprecedented policy change. Those tail risks are where human judgment still really matters.\n\nINTERVIEWER: The black swan problem.\n\nGUEST: Exactly. An AI trained on fifty years of market data has never seen a situation where the entire global economy shuts down for two months. It will extrapolate from imperfect analogies, and it might be systematically wrong in a way that a thoughtful human analyst might have caught.\n\nINTERVIEWER: Okay, we're getting toward the end of our time here and I want to make sure we leave people with something practical. If you're an individual investor sitting there thinking, \"I want to actually engage with this, where do I even start?\" — what's your honest advice?\n\nGUEST: Start with the tools that are already available and accessible. Most major brokerages now have AI-powered features — portfolio analysis tools, personalized insights, risk assessment. Use them. Get comfortable with what they can and can't do.\n\nGUEST: If you're working with a financial advisor, ask them directly: how are you using AI in your practice? What tools are you using? A good advisor in 2025 should have a clear answer to that question. If they look at you blankly, that's meaningful information.\n\nINTERVIEWER: And for people thinking about investing in AI itself as a sector — how do they approach that without just chasing the hype?\n\nGUEST: Think in layers. There's the infrastructure layer — the chips, the data centers, the cloud computing companies. There's the application layer — companies building AI-powered financial tools. And there's the end-user layer — traditional financial firms that are successfully integrating AI to improve margins and performance.\n\nGUEST: Diversifying across those layers is smarter than betting everything on the company that's currently getting the most attention. The infrastructure play — chips, compute — has been the most reliable so far, but valuations have gotten stretched. The application layer still has a lot of room to develop.\n\nINTERVIEWER: Before we wrap up, if you had to boil everything we've talked about down to three things people should remember, what would they be?\n\nGUEST: First: AI in investing is not a future thing. It is a now thing. Ninety percent of professional investment managers are already using it or actively planning to. The transformation is underway whether you engage with it or not.\n\nGUEST: Second: AI is a tool that amplifies human judgment, it doesn't replace it. The best outcomes are going to come from people and institutions that figure out how to combine the speed and pattern-recognition of AI with genuine human wisdom about context and uncertainty.\n\nGUEST: Third: the individual investor today has access to analytical capabilities that would have been available only to the most sophisticated hedge funds just a decade ago. That democratization is real, and it's worth taking advantage of — but only with clear eyes about the limitations.\n\nINTERVIEWER: I love that. The democratization piece doesn't get talked about enough. This used to be only for people with Bloomberg terminals and armies of analysts.\n\nGUEST: And the playing field isn't fully level — it never will be — but it is meaningfully more level than it was. That's actually a big deal for regular people trying to build long-term wealth.\n\nINTERVIEWER: This has been genuinely one of the most illuminating conversations I've had on this show in a while. I feel like I need to go rethink my entire portfolio now.\n\nGUEST: Just feed it into an AI and ask it to optimize it. But then question the output. That's the whole job now.\n\nINTERVIEWER: Perfect note to end on. Thank you so much for being here today. This was fantastic.\n\nGUEST: My pleasure. Thanks for the sharp questions — kept me on my toes.\n\nINTERVIEWER: And that's a wrap on today's episode. The key takeaways: AI in investing is already here, not coming — ninety percent of professional managers are using it. It's about amplifying human judgment, not replacing it. And the tools are increasingly available to regular investors, not just the big institutions. If you found this valuable, share it with someone who manages their own investments. And we will see you next time."
+  },
+  {
+    "id": "88a4cc1d-8e1e-47fa-b4d0-27b82e2c6277",
+    "topic": "How to invest in 2026",
+    "format": "debate",
+    "formatLabel": "Two-Host Debate",
+    "createdAt": "2026-04-12T19:31:31.102Z",
+    "audioUrl": "/episodes/88a4cc1d-8e1e-47fa-b4d0-27b82e2c6277.mp3",
+    "fileSizeBytes": 6322621,
+    "sources": [
+      {
+        "title": "How to set yourself up for investing success in 2026 - Current",
+        "url": "https://current.com/blog/how-to-set-yourself-up-for-investing-success-in-2026/"
+      },
+      {
+        "title": "Best Investments 2026: Complete Guide (2025) - The Land Geek",
+        "url": "https://www.thelandgeek.com/blog-best-investments-2026/"
+      },
+      {
+        "title": "Investment Directions 2026 Outlook",
+        "url": "https://www.ishares.com/us/insights/inside-the-market/2026-market-outlook-investment-directions"
+      },
+      {
+        "title": "10 Best Investments For 2026 | Bankrate",
+        "url": "https://www.bankrate.com/investing/best-investments/"
+      },
+      {
+        "title": "The Odds Are Changing: Investing in 2026 - BlackRock",
+        "url": "https://www.blackrock.com/us/financial-professionals/insights/investing-in-2026"
+      }
+    ],
+    "script": "HOST1: Alright, real talk — if you walked into 2025 thinking you had investing figured out, the market probably humbled you at least once. So what does 2026 look like, and more importantly, how do you actually make money in it?\n\nHOST2: That's the question, isn't it. And I'll be upfront — I think a lot of the \"best investments for 2026\" content out there is dangerously optimistic. So today we're going to push back on some of that enthusiasm.\n\nHOST1: And I'm going to push back on the pushback, because I genuinely think 2026 is shaping up to be one of the more interesting opportunity-rich environments we've seen in years.\n\nHOST2: We'll see about that. I'm Jamie, the voice of reason on this show.\n\nHOST1: And I'm Alex, the voice of possibility. Welcome to the show, everyone. Let's get into it.\n\nHOST2: So let's start with the macro picture, because you can't talk about where to put your money without talking about the environment you're putting it into. And the environment heading into 2026 is genuinely complicated.\n\nHOST1: It is, but complicated doesn't mean bad. BlackRock's 2026 outlook actually makes a pretty compelling case that the economy can stay resilient. Real private domestic final purchases are still pointing to growth around two percent in real terms. That's not gangbusters, but it's not a recession either.\n\nHOST2: Two percent real growth. I want people to really sit with that number. That's not the roaring economy some people seem to be assuming when they're plowing money into growth stocks.\n\nHOST1: But here's the thing — two percent with fiscal deficits still large, liquidity not scarce, and the Fed continuing to move toward neutral rates? That's actually a pretty supportive backdrop. There's a meaningful cushion against a classic demand-side recession, according to BlackRock's analysis.\n\nHOST2: Okay, I'll grant you that the policy environment is supportive. But supportive isn't the same as \"go load up on risk.\" And I think that distinction matters enormously for individual investors right now.\n\nHOST1: Fair. So let's talk about what that actually means for how people should position their portfolios. And I want to start with something that isn't sexy at all, but is genuinely the most important thing anyone can do right now.\n\nHOST2: Oh, you're going to say rebalancing, aren't you.\n\nHOST1: I'm going to say rebalancing. Look, after a strong 2025 for equities, a lot of people are sitting on portfolios that have drifted way outside their original plan. If you had an eighty-twenty stocks-to-bonds allocation and you haven't touched it, you might be sitting at ninety-ten without even realizing it.\n\nHOST2: And the problem with that is not just theoretical. If you're running ninety percent stocks and the market corrects fifteen or twenty percent — which at some point it will — you're taking on way more damage than your plan ever accounted for.\n\nHOST1: Exactly. And the beautiful thing about rebalancing is that it's essentially a disciplined, emotion-free way of selling high and buying low. You sell the stuff that's grown beyond its target weight and buy the stuff that's lagged. It's not glamorous, but it works.\n\nHOST2: I love that it takes emotion out of the equation, because emotion is the number one portfolio killer. People see their tech stocks up forty percent and they think, why would I ever sell any of this? And then they don't rebalance and then they ride the whole thing back down.\n\nHOST1: We've all been there or know someone who has. So rebalancing — do it. Set a calendar reminder if you have to. Okay, let's talk about the actual investment themes for 2026, because there are some really interesting ones.\n\nHOST2: AI. You're going to say AI.\n\nHOST1: Obviously I'm going to say AI. But hear me out before you roll your eyes. This isn't just hype. BlackRock identifies AI as their top equity investment theme for 2026, and the data behind that call is genuinely striking.\n\nHOST2: Give me the data then. Convince me.\n\nHOST1: So BlackRock looked at the forty-six stocks in the S&P 500 that they identify as AI stocks. From 2023 to 2025, those companies grew their aggregate net income by thirty percent per year. Thirty percent. The non-AI cohort? Three percent per year.\n\nHOST2: Okay, that's a massive difference. I'll admit that. But here's my concern — at what point is that growth already priced in? If everyone knows AI stocks are growing earnings thirty percent a year, doesn't the market price that in and then some?\n\nHOST1: That's a legitimate question, and the honest answer is yes, some of it is priced in. But here's the counterargument — BlackRock's thesis is that the market is still underappreciating the opportunity. The AI data center buildout is still in its early stages. The infrastructure investment cycle has years to run.\n\nHOST2: The data center buildout argument is interesting because it's not just about the software companies. It's about power infrastructure, semiconductors, networking equipment. It's a much broader set of beneficiaries than just the handful of names everyone talks about.\n\nHOST1: Right, and that's where it gets interesting for investors who feel like they've missed the obvious AI plays. There's a whole ecosystem of picks-and-shovels type businesses that are directly benefiting from this buildout.\n\nHOST2: I want to pump the brakes slightly though. Because when I look at valuations across AI-adjacent stocks, a lot of them are pricing in a lot of perfection. And in a world where BlackRock themselves are saying both upside surprises and downside accidents become more common in 2026, owning something at a stretched valuation is a real risk.\n\nHOST1: Totally agree that valuation discipline matters. I'm not saying throw money at anything with AI in its press releases. I'm saying the structural trend is real, the earnings growth is real, and thoughtful exposure to the theme makes sense.\n\nHOST2: Okay. So let's talk about fixed income, because I think this is actually where some of the more interesting 2026 conversations are happening.\n\nHOST1: Yes! And I think fixed income is genuinely underappreciated right now by a lot of retail investors who just think bonds are boring.\n\nHOST2: Bonds are boring. That's not wrong.\n\nHOST1: They're boring and they're making real money right now, which is a combination that should make boring actually exciting.\n\nHOST2: BlackRock's position on quality fixed income is interesting. They're not saying go buy broad beta exposure in investment grade credit, because investment grade spreads are near historical tights. So you're not going to get a ton of excess return just from spread compression. But you can lock in historically high yields lending to solid balance sheets.\n\nHOST1: And that's a meaningful shift from where we were two or three years ago. When rates were near zero, fixed income really was a capital allocation wasteland. Today you're actually getting compensated for lending money to quality companies.\n\nHOST2: I want to flag something from the institutional credit outlook that I think is really important for people to understand. When we talk about high yield bonds — which is another name for junk bonds, just to be clear — the spreads right now are below three hundred basis points. That sounds technical, but what it means practically is that the extra yield you're getting for taking on credit risk versus safe government bonds is historically very thin.\n\nHOST1: And the research shows that spreads this tight have only happened about five percent of the time since January 2000. Which means the cushion against something going wrong is very small.\n\nHOST2: Right. So if you're reaching for yield in high yield credit right now, you need to be really careful. There's not a lot of margin for error if we start seeing defaults tick up.\n\nHOST1: Which brings up another point from the institutional outlook — with the return to a more normal credit cycle after a long period of financial repression, we're likely to see more idiosyncratic dislocations. Meaning some companies are going to get into trouble, and if you're in a passive high yield fund, you're along for that ride.\n\nHOST2: This is one of those rare areas where I actually think active management can add value. Because in a normal credit cycle, not all high yield bonds are created equal. Having someone who's doing real credit analysis matters more than it did when free money was keeping everything afloat.\n\nHOST1: Okay, let's shift gears and talk about something that's going to be controversial on this show — cryptocurrencies.\n\nHOST2: Here we go.\n\nHOST1: Look, I'm not a crypto maximalist. But the best investments for 2026 lists that we've been looking at consistently include crypto as part of a diversified portfolio, and I think it deserves a serious conversation rather than reflexive dismissal.\n\nHOST2: I don't dismiss it. I just want to contextualize it properly. Crypto is a high-risk, high-volatility asset class. It can absolutely produce significant returns. It can also lose seventy, eighty percent of its value in a matter of months. We've seen it happen.\n\nHOST1: Multiple times. And that's why the standard advice — which I endorse — is that crypto should only represent a small portion of your overall portfolio. Something you can afford to have go to zero without derailing your financial plan.\n\nHOST2: I think the interesting question for 2026 specifically is what role regulatory clarity — or lack thereof — plays. The environment has shifted, and that does change the institutional adoption picture.\n\nHOST1: It does. And institutional adoption is actually one of the more meaningful structural shifts in crypto over the past couple of years. When it was purely retail-driven speculation, the volatility was almost entirely sentiment-driven. Institutional involvement introduces a different kind of market participant with different holding patterns.\n\nHOST2: Which doesn't eliminate the risk but does change the character of the market somewhat. Okay, I want to talk about real estate because I think this is one where people have a lot of preconceived notions.\n\nHOST1: Real estate is interesting in 2026 specifically because the rate environment has changed. When rates were at the peaks we saw in 2023 and 2024, real estate broadly got hammered — direct real estate, REITs, all of it. As rates normalize, the math on real estate starts to look better.\n\nHOST2: The fundamentals for certain real estate sectors are genuinely compelling. Data centers — back to the AI theme — industrial real estate, multifamily in the right markets. These are areas where demand drivers are structural, not cyclical.\n\nHOST1: And for most people, the most practical way to get real estate exposure without buying a building is through REITs — real estate investment trusts — or REIT ETFs. You get diversified exposure to real estate income without the landlord headaches.\n\nHOST2: Without unclogging toilets at two in the morning, yes. That's a feature, not a bug.\n\nHOST1: Significant feature. Okay, I want to talk about ETFs more broadly because I think they are the single most powerful tool available to everyday investors and they're still underutilized.\n\nHOST2: Agreed. And specifically for 2026, there are some interesting sector-focused ETFs that are worth knowing about. Technology, renewable energy, healthcare — these are sectors that are expected to be real drivers of market returns.\n\nHOST1: The classics are still classics for a reason. SPY, which tracks the S&P 500, QQQ, which gives you heavy technology exposure — these are funds that provide broad market access at very low cost. For someone who just wants market returns without trying to pick winners, a simple S&P 500 index fund remains one of the best long-term investment decisions anyone can make.\n\nHOST2: And I want to reinforce that because sometimes the sophistication bias takes over in conversations like this one. We start talking about idiosyncratic credit dislocations and AI datacenter buildouts and high yield spread dynamics, and the person listening thinks they need to do all of that complicated stuff to invest well.\n\nHOST1: You really don't. The research on this is overwhelming. Most active fund managers underperform a simple index fund over long time horizons. A boring index fund, consistently contributed to, consistently rebalanced — that beats the vast majority of sophisticated strategies.\n\nHOST2: So let's talk about dividend stocks because Bankrate's list of best investments for 2026 highlights them, and I think they deserve a real discussion. The pitch for dividend stocks is that you get the potential for capital appreciation plus cash income in the short term. That's appealing.\n\nHOST1: It is appealing, and for investors who are closer to retirement or who need some cash flow from their portfolio, dividend stocks serve a real purpose. But there's a trap that people fall into.\n\nHOST2: Chasing yield. The highest dividend yield on paper is often a warning sign, not an opportunity. If a company is yielding eight or nine percent, the market is probably telling you something about the sustainability of that dividend.\n\nHOST1: Exactly. You want companies with a solid history of dividend increases, not just high current yields. There's a category of stocks called Dividend Aristocrats — companies that have raised their dividends for twenty-five or more consecutive years. Those are the kinds of businesses where the dividend signals genuine financial strength.\n\nHOST2: And again, if you don't want to pick individual dividend stocks, there are excellent dividend-focused ETFs that give you a diversified basket of high-quality dividend payers. Takes the single-company risk off the table.\n\nHOST1: Okay, I want to make sure we talk about something that I think is criminally underemphasized in investing conversations — increasing your contributions.\n\nHOST2: The math on this is so clear and so underappreciated. People spend enormous energy trying to optimize their investment selections, trying to pick the right stocks or the right funds, when the single highest-impact thing most people can do is just put more money in.\n\nHOST1: If you're contributing three percent of your income to your 401k, bumping that to four or five percent this year will do more for your long-term wealth than any investment selection decision you could possibly make.\n\nHOST2: Craig Ferrantino, who runs Craig James Financial Services, has a line I love on this. He basically says if you overdo it, you can always bring it back down. The cost of temporarily over-contributing is tiny. The cost of under-contributing for years is enormous.\n\nHOST1: And this is especially important right now because of where tax-advantaged contribution limits sit. IRAs, 401ks — these accounts let your money grow in ways that dramatically compound over time. Every dollar you don't maximize in those accounts is a dollar growing at a tax disadvantage.\n\nHOST2: Let's talk about risk tolerance for a minute, because I think people genuinely misunderstand what their risk tolerance is until the market tests it.\n\nHOST1: This is so real. People fill out a questionnaire when they open a brokerage account and say sure, I can handle a twenty percent drawdown. And then the market drops fifteen percent in six weeks and they're panic-selling at the bottom.\n\nHOST2: Your true risk tolerance is revealed in bear markets, not in questionnaires. And one of the most important things to do right now is honestly ask yourself — if my portfolio dropped thirty percent tomorrow, would I hold? Would I buy more? Or would I sell?\n\nHOST1: And calibrate your allocation to the honest answer, not the aspirational one. If you know you're going to panic-sell a thirty percent drawdown, then running a ninety percent equity allocation is a bad idea regardless of what the optimal theoretical allocation says.\n\nHOST2: Bankrate makes a really important point about time horizon here. Your investment strategy should be completely different depending on whether you need the money in two years or twenty years. If you need it soon, you need safety. If you have decades, you can absorb volatility.\n\nHOST1: Don't put next month's rent in the stock market. I feel like that should be obvious, but you'd be surprised.\n\nHOST2: You would be surprised. Okay, I want to spend a few minutes on strategy adaptation because I think one of the biggest mistakes investors make is setting an investment strategy and then treating it as fixed.\n\nHOST1: Markets change. Your circumstances change. Your goals change. The strategy that was right at thirty might not be right at forty-five. And within a given year, market conditions can shift dramatically.\n\nHOST2: The guidance on this is really to build in regular review cycles. Quarterly at minimum, annually at depth. And by review I don't mean panic-checking your portfolio every day — I mean intentionally sitting down, looking at how your portfolio has performed relative to your plan, and making thoughtful adjustments.\n\nHOST1: And part of that review is cash flow. Before you make investment decisions for 2026, look at your actual cash flow from 2025. What came in, what went out, where can you free up more for investing. Investment strategy doesn't happen in a vacuum separate from your overall financial life.\n\nHOST2: Alright, I want to do something a little different here. Let's do a rapid-fire round where I steelman the case for each major asset class and then give my actual take. Ready?\n\nHOST1: Let's do it.\n\nHOST2: US equities. Steelman: earnings growth has been strong, AI theme has real momentum, the economy is holding up. My take: still a core holding, but valuations are elevated and expectations are high. Be selective, not absent.\n\nHOST1: International equities. Steelman: valuations are significantly cheaper than US equities, some international markets have real recovery potential. My take: I think a modest allocation to international makes sense as a diversifier. Don't ignore the rest of the world just because the US has dominated for fifteen years.\n\nHOST2: Bonds. Steelman: actual yields, real income, portfolio stabilization, quality matters. My take: yes, own quality fixed income. Be cautious about chasing high yield given how tight spreads are. Lock in good yields in investment grade.\n\nHOST1: Real estate. Steelman: rate normalization improving the picture, AI-driven data center demand, multifamily fundamentals. My take: through REITs and ETFs, yes. Direct property investing requires a lot more capital and expertise. Know what you're signing up for.\n\nHOST2: Crypto. Steelman: growing institutional adoption, regulatory clarity improving, small allocation can add return potential. My take: small allocation only, something you can genuinely afford to lose. Not a core portfolio position.\n\nHOST1: I think that's a pretty fair rapid-fire. We don't agree on everything but that's a reasonable starting framework.\n\nHOST2: We agree more than we disagree, which is a little disappointing for our debate format, but probably good for the listeners.\n\nHOST1: Let's do takeaways. Give me your top three for 2026.\n\nHOST2: Number one — rebalance. Seriously. If you haven't touched your portfolio in a year or more and it's been a strong equity market, your allocation has drifted. Get it back to where it should be. Number two — know your actual risk tolerance, not your aspirational one, and make sure your portfolio reflects it. And number three — the most impactful investment decision you can make is often not which fund to buy, it's how much to contribute. Increase your contributions if you can. Even one percent more.\n\nHOST1: Mine are slightly different. Number one — don't sleep on fixed income. Real yields are back. Quality bonds deserve a real place in your portfolio in a way they didn't five years ago. Number two — get thoughtful AI exposure, but through diversified vehicles. The earnings growth numbers are real, the buildout cycle is real, but you don't want to be picking individual names unless you really know what you're doing. And number three — stay in the market. The people who get wealthy through investing aren't usually the ones who made the brilliant tactical calls. They're the ones who stayed invested through multiple cycles, kept contributing, kept rebalancing, and let compounding do its work.\n\nHOST2: That last one is probably the most important thing either of us said today. The enemy of long-term wealth building is usually not bad stock picks — it's getting out of the market at the wrong time and missing the recovery.\n\nHOST1: Time in the market over timing the market. It's a cliché because it's true.\n\nHOST2: Alright, let's land this plane. If you take one thing away from today — just one — make it this: investing success in 2026 is not about finding the perfect hot stock or timing the market perfectly. It's about having a plan, sticking to it with discipline, and making incremental improvements where you can.\n\nHOST1: Rebalance, contribute more, stay diversified, stay invested. The rest is noise.\n\nHOST2: Well said. Thanks everyone for spending time with us today. If this episode was useful, share it with someone who's trying to figure out their financial picture heading into 2026.\n\nHOST1: We'd love to hear what you're doing with your portfolio — questions, disagreements, things we got wrong. We're always here for a good argument. Until next time, I'm Alex.\n\nHOST2: And I'm Jamie. Stay curious, stay skeptical, and stay invested.\n\nHOST1: We'll see you next episode."
+  }
+]
