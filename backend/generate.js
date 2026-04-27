@@ -45,13 +45,14 @@ Format every single line EXACTLY as:
 ALEX: [dialogue]
 JAMIE: [dialogue]`;
 
-  const message = await client.messages.create({
+  const stream = await client.messages.stream({
     model: 'claude-sonnet-4-6',
     max_tokens: 8192,
     system: 'You write warm, clear, educational podcast scripts for two hosts who explain topics to the listener in plain English. No jargon, no fluff, no debate. Output only ALEX:/JAMIE: formatted dialogue lines.',
     messages: [{ role: 'user', content: prompt }]
   });
 
+  const message = await stream.finalMessage();
   const script = message.content[0].text.trim();
   const speakerMap = { ALEX: 0, JAMIE: 1 };
 
